@@ -5,9 +5,8 @@ import spark.ModelAndView;
 import spark.Spark;
 import static spark.Spark.*;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
+import tikape.runko.database.AnnosDao;
 import tikape.runko.database.Database;
-import tikape.runko.database.OpiskelijaDao;
-
 public class Main {
 
     public static void main(String[] args) throws Exception {
@@ -18,7 +17,7 @@ public class Main {
         Database database = new Database("jdbc:sqlite:opiskelijat.db");
         database.init();
 
-        OpiskelijaDao opiskelijaDao = new OpiskelijaDao(database);
+        AnnosDao opiskelijaDao = new AnnosDao(database);
 
         get("/", (req, res) -> {
             HashMap map = new HashMap<>();
