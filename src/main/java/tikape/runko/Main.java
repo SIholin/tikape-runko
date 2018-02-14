@@ -14,7 +14,7 @@ public class Main {
         Spark.port(Integer.valueOf(System.getenv("PORT")));
      }
         
-        Database database = new Database("jdbc:sqlite:opiskelijat.db");
+        Database database = new Database("jdbc:sqlite:drinkkitietokanta.db");
         database.init();
 
         AnnosDao opiskelijaDao = new AnnosDao(database);
