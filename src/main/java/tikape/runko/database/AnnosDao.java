@@ -6,6 +6,12 @@ import java.util.List;
 import tikape.runko.domain.Annos;
 
 public class AnnosDao implements Dao<Annos, Integer> {
+    
+    private Database database;
+    
+    public AnnosDao(Database database) {
+        this.database = database;
+    }
 
     @Override
     public Annos findOne(Integer key) throws SQLException {
