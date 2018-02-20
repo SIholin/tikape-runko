@@ -1,6 +1,7 @@
 
 package tikape.runko.database;
 
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 import tikape.runko.domain.Annos;
@@ -11,6 +12,7 @@ public class AnnosDao implements Dao<Annos, Integer> {
     
     public AnnosDao(Database database) {
         this.database = database;
+        
     }
 
     @Override
@@ -20,6 +22,9 @@ public class AnnosDao implements Dao<Annos, Integer> {
 
     @Override
     public List<Annos> findAll() throws SQLException {
+        
+        //PreparedStatement statement = database.prepareStatement("SELECT * FROM Annos");
+        
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
