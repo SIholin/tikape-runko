@@ -6,7 +6,6 @@ import java.util.List;
 import tikape.runko.domain.AnnosRaakaAine;
 
 
-
 public class AnnosRaakaAineDao implements Dao<AnnosRaakaAine, Integer> {
     
     private Database database;
@@ -30,10 +29,9 @@ public class AnnosRaakaAineDao implements Dao<AnnosRaakaAine, Integer> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-    
-    @Override
-    public AnnosRaakaAine saveOrUpdate(AnnosRaakaAine object) {
-      throw new UnsupportedOperationException("Not supported yet.");
+    @Override 
+    public AnnosRaakaAine saveOrUpdate(AnnosRaakaAine object) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
     
 }
