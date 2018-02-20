@@ -9,7 +9,13 @@
     <body>
         <h1>Hello World!</h1>
 
-        <p>Ja .. <span th:text="${viesti}">jotain?</span></p>
+        <span th:text="${viesti}">jotain?</span>
+        
+        <ol>
+            <li th:each="annos: ${annokset}">
+                <span th:text="${annos.nimi}">annoksen nimi</span> <a th:href="${'/' + annos.id}">linkki</a>
+            </li>
+        </ol>
 
         <p><a href="/opiskelijat">Tästä opiskelijalistaukseen.</a></p>
         <p><a href="/annokset">Tästä annoslistaukseen.</a></p>

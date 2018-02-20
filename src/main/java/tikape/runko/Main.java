@@ -40,7 +40,7 @@ public class Main {
 
         get("/", (req, res) -> {
             HashMap map = new HashMap<>();
-            map.put("viesti", "tervehdys");
+            map.put("annokset", annosDao.findAll());
 
             return new ModelAndView(map, "index");
         }, new ThymeleafTemplateEngine());
