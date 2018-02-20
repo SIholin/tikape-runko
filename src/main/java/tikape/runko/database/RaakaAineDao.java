@@ -27,19 +27,37 @@ public class RaakaAineDao implements Dao<RaakaAine, Integer> {
             return null;
         }
 
-        RaakaAine ra = new RaakaAine(rs.getInt("id"), rs.getString("nimi"));
+        RaakaAine raakaaine = new RaakaAine(rs.getInt("id"), rs.getString("nimi"));
 
         stmt.close();
         rs.close();
 
         conn.close();
 
-        return ra;
+        return raakaaine;
     }
 
     @Override
     public List<RaakaAine> findAll() throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Connection conn = database.getConnection();
+        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM RaakaAine WHERE id = ?");
+        List<RaakaAine> raakaaineet = new ArrayList();
+        
+        ResultSet rs = stmt.executeQuery();
+        if (!rs.next()) {
+            return null;
+        }
+        while (rs.next()) {
+        RaakaAine ra = new RaakaAine(rs.getInt("id"), rs.getString("nimi"));
+        raakaaineet.add(ra);
+        }
+        
+        stmt.close();
+        rs.close();
+
+        conn.close();
+
+        return raakaaineet;
     }
 
     @Override
