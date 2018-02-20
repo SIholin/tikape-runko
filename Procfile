@@ -1,1 +1,1 @@
-web:    java -cp target/classes:target/dependency/* src/main/java/tikape.runko.Main
+web:    java -cp target/classes:target/dependency/* tikape/runko/Main
