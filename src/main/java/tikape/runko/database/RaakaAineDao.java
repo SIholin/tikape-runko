@@ -74,11 +74,50 @@ public class RaakaAineDao implements Dao<RaakaAine, Integer> {
     
     @Override
     public RaakaAine saveOrUpdate(RaakaAine object) throws SQLException{
-      Connection conn = database.getConnection();
-      PreparedStatement stmt = conn.prepareStatement("UPDATE");
-      
-      RaakaAine ra = new RaakaAine(1, "jotain");
-      return ra;
+        if (object.getId() == null) {
+            return save(object);
+        } else {
+            return update(object);
+        }
+    }
+    
+    private RaakaAine save(RaakaAine object) throws SQLException {
+        Connection conn = database.getConnection();
+        PreparedStatement stmt = conn.prepareStatement("INSERT INTO RaakaAine" + "(nimi)" + "VALUES (?)");
+        
+        stmt.setString(1, object.getNimi());
+        stmt.executeUpdate();
+        stmt.close();
+        
+        stmt = conn.prepareStatement("SELECT * FROM RaakaAine WHERE nimi = ?");
+        stmt.setString(1, object.getNimi());
+        
+        ResultSet rs = stmt.executeQuery();
+        rs.next();
+        
+        RaakaAine ra = new RaakaAine(rs.getInt("id"), rs.getString("nimi"));
+        
+        stmt.close();
+        rs.close();
+        conn.close();
+        return ra;
+        
+        
+    }
+    
+    private RaakaAine update(RaakaAine object) throws SQLException {
+        
+        Connection conn = database.getConnection();
+        PreparedStatement stmt = conn.prepareStatement("UPDATE RaakaAine SET" + "nimi = ? WHERE id = ?");
+        stmt.setString(1, object.getNimi());
+        stmt.setInt(2, object.getId());
+        
+        stmt.executeUpdate();
+        
+        stmt.close();
+        conn.close();
+        
+        return object;
     }
     
 }
