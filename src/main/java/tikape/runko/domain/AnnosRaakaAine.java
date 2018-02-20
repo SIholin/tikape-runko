@@ -9,4 +9,7 @@ public class AnnosRaakaAine {
     private Integer annosId;
     private Integer raakaaineId;
     
+    public AnnosRaakaAine() {
+        
+    }
 }
