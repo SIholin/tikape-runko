@@ -40,7 +40,7 @@ public class RaakaAineDao implements Dao<RaakaAine, Integer> {
     @Override
     public List<RaakaAine> findAll() throws SQLException {
         Connection conn = database.getConnection();
-        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM RaakaAine WHERE id = ?");
+        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM RaakaAine");
         List<RaakaAine> raakaaineet = new ArrayList();
         
         ResultSet rs = stmt.executeQuery();
