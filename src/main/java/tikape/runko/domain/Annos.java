@@ -6,7 +6,7 @@ public class Annos {
     private String nimi;
     private Integer id;
     
-    public Annos(String nimi, Integer id) {
+    public Annos(Integer id, String nimi) {
         this.id = id;
         this.nimi = nimi;
     }

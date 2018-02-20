@@ -30,7 +30,7 @@ public class AnnosDao implements Dao<Annos, Integer> {
             return null;
         }
 
-        Annos annos = new Annos(rs.getString("nimi"), rs.getInt("id"));
+        Annos annos = new Annos(rs.getInt("id"), rs.getString("nimi"));
 
         stmt.close();
         rs.close();
@@ -51,7 +51,7 @@ public class AnnosDao implements Dao<Annos, Integer> {
             return null;
         }
         while (rs.next()) {
-        Annos ra = new Annos(rs.getString("nimi"), rs.getInt("id"));
+        Annos ra = new Annos(rs.getInt("id"), rs.getString("nimi"));
         annokset.add(ra);
         }
         
