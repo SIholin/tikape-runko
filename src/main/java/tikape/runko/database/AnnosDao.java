@@ -73,4 +73,9 @@ public class AnnosDao implements Dao<Annos, Integer> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+    @Override 
+    public Annos saveOrUpdate(Annos object) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+    
 }

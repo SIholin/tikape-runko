@@ -73,8 +73,12 @@ public class RaakaAineDao implements Dao<RaakaAine, Integer> {
     }
     
     @Override
-    public RaakaAine saveOrUpdate(RaakaAine object) {
+    public RaakaAine saveOrUpdate(RaakaAine object) throws SQLException{
+      Connection conn = database.getConnection();
+      PreparedStatement stmt = conn.prepareStatement("UPDATE");
       
+      RaakaAine ra = new RaakaAine(1, "jotain");
+      return ra;
     }
     
 }
