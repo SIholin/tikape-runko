@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import spark.ModelAndView;
 import spark.Spark;
 import static spark.Spark.*;
@@ -91,21 +92,42 @@ public class Main {
             
             
         }, new ThymeleafTemplateEngine());
-        
-<<<<<<< HEAD
+
         Spark.post("/raakaaineet", (req, res) -> {
+            
+           
+                
+            
             String nimi = req.queryParams("nimi");
             
             raakaaineDao.saveOrUpdate(new RaakaAine(null, nimi));
+          
+           
+            
+            
             res.redirect("/raakaaineet");
             return "";
         });
+//        
         
-        
-        get("/annos", (req, res) -> {
-=======
+//        Spark.post("/raakaaineet", (req, res) -> {
+//            
+//            String nimi = req.queryParams("nimi");
+//            List<RaakaAine> raakaaineett = raakaaineDao.findAll();
+//            int i = 0;
+//            while(i < raakaaineett.size()) {
+//                if (raakaaineett.get(i).getNimi().equals(nimi)) {
+//                    raakaaineDao.delete(raakaaineett.get(i).getId());
+//                }
+//                i ++;
+//            }
+//            
+//            res.redirect("/raakaaineet");
+//            return "";
+//        });
+
         get("/:id", (req, res) -> {
->>>>>>> 98b89e627c78128a9f494cdb16015c340c37f631
+
             HashMap map = new HashMap<>();
             Integer annosId = Integer.parseInt(req.params(":id"));
             map.put("annos", annosDao.findOne(annosId));
