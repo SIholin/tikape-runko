@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.HashMap;
 import spark.ModelAndView;
 import spark.Spark;
@@ -12,6 +13,7 @@ import spark.template.thymeleaf.ThymeleafTemplateEngine;
 import tikape.runko.database.AnnosDao;
 import tikape.runko.database.Database;
 import tikape.runko.database.RaakaAineDao;
+import tikape.runko.domain.Annos;
 public class Main {
 
     public static void main(String[] args) throws Exception {
@@ -37,6 +39,8 @@ public class Main {
         AnnosDao annosDao = new AnnosDao(database);
         RaakaAineDao raakaaineDao = new RaakaAineDao(database);
         
+        ArrayList<Annos> annokset = new ArrayList();
+        
 
         get("/", (req, res) -> {
             HashMap map = new HashMap<>();
@@ -59,12 +63,32 @@ public class Main {
             return new ModelAndView(map, "annokset");
         }, new ThymeleafTemplateEngine());
         
-        get("/raakaaineet", (req, res) -> {
+        
+        Spark.get("/raakaaineet", (req, res) -> {
+            
+             
             HashMap map = new HashMap<>();
-            map.put("raakaaineet", raakaaineDao.findAll());
+            map.put("/raakaaineet", raakaaineDao.findAll());
 
             return new ModelAndView(map, "raakaaineet");
         }, new ThymeleafTemplateEngine());
+        
+        Spark.post("/raakaaineet", (req, res) -> {
+            String nimi = req.queryParams("nimi");
+            annokset.add(new Annos(annokset.size() + 1, nimi));
+            
+            res.redirect("/raakaaineet");
+            return "";
+            
+        });
+        
+//        get("/raakaaineet", (req, res) -> {
+//            HashMap map = new HashMap<>();
+//            map.put("raakaaineet", raakaaineDao.findAll());
+//            
+//
+//            return new ModelAndView(map, "raakaaineet");
+//        }, new ThymeleafTemplateEngine());
 
         get("/opiskelijat/:id", (req, res) -> {
             HashMap map = new HashMap<>();
