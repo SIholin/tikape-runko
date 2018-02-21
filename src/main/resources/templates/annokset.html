@@ -29,13 +29,18 @@
             Drinkin nimi:
             <br>
                 <select name="drinkki">
-                    <option name="2">GT</option>
+                    <option th:each="annos: ${annokset}">
+                        <span th:text="${annos.nimi}">annoksen nimi</span>
+                    </option>
+                    
                 </select>
             <br>
             Lisättävä raaka-aine
             <br>
                 <select name="raakaAine">
-                    <option name="1">Rommi</option>
+                    <option th:each="raakaaine: ${raakaaineet}">
+                        <span th:text="${raakaaine.nimi}">raakaaineen nimi</span>
+                    </option>
                 </select>
             <br>
             Järjestys
