@@ -20,5 +20,11 @@
         <p><a href="/opiskelijat">Tästä opiskelijalistaukseen.</a></p>
         <p><a href="/annokset">Tästä annoslistaukseen.</a></p>
         <p><a href="/raakaaineet">Tästä raaka-ainelistaukseen.</a></p>
+        
+        <ol>
+            <li th:each="annosraakaaine: ${annosraakaaineet}">
+                <span th:text="${annosraakaaine.maara}">annosraakaaineen id</span>
+            </li>
+        </ol>
     </body>
 </html>

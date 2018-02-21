@@ -12,6 +12,7 @@ import spark.template.thymeleaf.ThymeleafTemplateEngine;
 import tikape.runko.database.AnnosDao;
 import tikape.runko.database.Database;
 import tikape.runko.database.RaakaAineDao;
+import tikape.runko.database.AnnosRaakaAineDao;
 public class Main {
 
     public static void main(String[] args) throws Exception {
@@ -36,12 +37,13 @@ public class Main {
 
         AnnosDao annosDao = new AnnosDao(database);
         RaakaAineDao raakaaineDao = new RaakaAineDao(database);
+        AnnosRaakaAineDao annosraakaainedao = new AnnosRaakaAineDao(database);
         
 
         get("/", (req, res) -> {
             HashMap map = new HashMap<>();
             map.put("annokset", annosDao.findAll());
-
+            map.put("annosraakaaineet", annosraakaainedao.findAll());
             return new ModelAndView(map, "index");
         }, new ThymeleafTemplateEngine());
 
@@ -71,6 +73,21 @@ public class Main {
             map.put("opiskelija", annosDao.findOne(Integer.parseInt(req.params("id"))));
 
             return new ModelAndView(map, "opiskelija");
+        }, new ThymeleafTemplateEngine());
+        
+        get("/annokset/:id", (req, res) -> {
+            HashMap map = new HashMap<>();
+            map.put("annos", annosDao.findOne(Integer.parseInt(req.params("id"))));
+
+            return new ModelAndView(map, "annos");
+        }, new ThymeleafTemplateEngine());
+        
+        get("/:id", (req, res) -> {
+            HashMap map = new HashMap<>();
+            map.put("annos", annosDao.findOne(Integer.parseInt(req.params("id"))));
+            map.put("annosraakaaineet", annosraakaainedao.findAll());
+            map.put("raakaaineet",raakaaineDao.findAll());
+            return new ModelAndView(map, "annos");
         }, new ThymeleafTemplateEngine());
    
 }
