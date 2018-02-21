@@ -41,11 +41,14 @@ public class Main {
         Database database = new Database("jdbc:sqlite:drinkkitietokanta.db");
         database.init();
 
+        
+        
         AnnosDao annosDao = new AnnosDao(database);
         RaakaAineDao raakaaineDao = new RaakaAineDao(database);
         AnnosRaakaAineDao annosraakaainedao = new AnnosRaakaAineDao(database);
         
-
+        ArrayList<RaakaAine> raakaaineet = new ArrayList<>();
+        
         get("/", (req, res) -> {
             HashMap map = new HashMap<>();
             map.put("annokset", annosDao.findAll());
@@ -69,14 +72,34 @@ public class Main {
             
         }, new ThymeleafTemplateEngine());
        
+//        
+//        get("/raakaaineet", (req, res) -> {
+//            HashMap map = new HashMap<>();
+//            map.put("raakaaineet", raakaaineDao.findAll());
+//            
+//
+//            return new ModelAndView(map, "raakaaineet");
+//        }, new ThymeleafTemplateEngine());
+//        
         
-        get("/raakaaineet", (req, res) -> {
-            HashMap map = new HashMap<>();
+        
+        Spark.get("/raakaaineet", (req, res) -> {
+            HashMap map = new HashMap();
             map.put("raakaaineet", raakaaineDao.findAll());
             
-
             return new ModelAndView(map, "raakaaineet");
+            
+            
         }, new ThymeleafTemplateEngine());
+        
+        Spark.post("/raakaaineet", (req, res) -> {
+            String nimi = req.queryParams("nimi");
+            
+            raakaaineDao.saveOrUpdate(new RaakaAine(null, nimi));
+            res.redirect("/raakaaineet");
+            return "";
+        });
+        
         
         get("/annos", (req, res) -> {
             HashMap map = new HashMap<>();

@@ -54,7 +54,7 @@ public class RaakaAineDao implements Dao<RaakaAine, Integer> {
             }
         }
         
-        return tehtavat;
+        return raakaaineet;
     }
 
     @Override
@@ -128,7 +128,7 @@ public class RaakaAineDao implements Dao<RaakaAine, Integer> {
     private RaakaAine update(RaakaAine object) throws SQLException {
         
         Connection conn = database.getConnection();
-        PreparedStatement stmt = conn.prepareStatement("UPDATE RaakaAine SET" + "nimi = ? WHERE id = ?");
+        PreparedStatement stmt = conn.prepareStatement("UPDATE RaakaAine SET " + "nimi = ? WHERE id = ?");
         stmt.setString(1, object.getNimi());
         stmt.setInt(2, object.getId());
         
