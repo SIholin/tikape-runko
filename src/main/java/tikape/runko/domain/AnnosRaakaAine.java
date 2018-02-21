@@ -14,4 +14,20 @@ public class AnnosRaakaAine {
         this.jarjestys = jarjestys;
         this.maara = maara;
     }
+    
+    public Integer getAnnosId() {
+        return this.annosId;
+    }
+    
+    public Integer getRaakaaineId() {
+        return this.raakaaineId;
+    }
+    
+    public Integer getJarjestys(){
+        return this.jarjestys;
+    }
+    
+    public String getMaara(){
+        return this.maara;
+    }
 }

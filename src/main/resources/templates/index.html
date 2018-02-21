@@ -16,10 +16,15 @@
                 <a th:href="${'/' + annos.id}"><span th:text="${annos.nimi}">annoksen nimi</span> </a>
             </li>
         </ul>
+
+        <p><a href="/opiskelijat">Tästä opiskelijalistaukseen.</a></p>
+        <p><a href="/annokset">Tästä annoslistaukseen.</a></p>
+        <p><a href="/raakaaineet">Tästä raaka-ainelistaukseen.</a></p>
         
-        <ul>
-            <li><a href="/annokset">Luo uusi drinkki.</a></li>
-            <li><a href="/raakaaineet">Tarkastele ja lisää aineksia</a></li>
-        </ul>
+        <ol>
+            <li th:each="annosraakaaine: ${annosraakaaineet}">
+                <span th:text="${annosraakaaine.maara}">annosraakaaineen id</span>
+            </li>
+        </ol>
     </body>
 </html>
