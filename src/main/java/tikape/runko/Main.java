@@ -13,11 +13,12 @@ import spark.template.thymeleaf.ThymeleafTemplateEngine;
 import tikape.runko.database.AnnosDao;
 import tikape.runko.database.Database;
 import tikape.runko.database.RaakaAineDao;
-<<<<<<< HEAD
+
 import tikape.runko.domain.Annos;
-=======
+
 import tikape.runko.database.AnnosRaakaAineDao;
->>>>>>> f48b7055dda8c87804817fe2be50fbf195ad341a
+import tikape.runko.domain.RaakaAine;
+
 public class Main {
 
     public static void main(String[] args) throws Exception {
@@ -44,8 +45,6 @@ public class Main {
         RaakaAineDao raakaaineDao = new RaakaAineDao(database);
         AnnosRaakaAineDao annosraakaainedao = new AnnosRaakaAineDao(database);
         
-        ArrayList<Annos> annokset = new ArrayList();
-        
 
         get("/", (req, res) -> {
             HashMap map = new HashMap<>();
@@ -69,25 +68,7 @@ public class Main {
             return new ModelAndView(map, "annokset");
             
         }, new ThymeleafTemplateEngine());
-        
-        
-        Spark.get("/raakaaineet", (req, res) -> {
-            
-             
-            HashMap map = new HashMap<>();
-            map.put("/raakaaineet", raakaaineDao.findAll());
-
-            return new ModelAndView(map, "raakaaineet");
-        }, new ThymeleafTemplateEngine());
-        
-        Spark.post("/raakaaineet", (req, res) -> {
-            String nimi = req.queryParams("nimi");
-            annokset.add(new Annos(annokset.size() + 1, nimi));
-            
-            res.redirect("/raakaaineet");
-            return "";
-            
-        });
+       
         
         get("/raakaaineet", (req, res) -> {
             HashMap map = new HashMap<>();
