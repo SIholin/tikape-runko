@@ -84,13 +84,13 @@ public class Main {
             
         });
         
-//        get("/raakaaineet", (req, res) -> {
-//            HashMap map = new HashMap<>();
-//            map.put("raakaaineet", raakaaineDao.findAll());
-//            
-//
-//            return new ModelAndView(map, "raakaaineet");
-//        }, new ThymeleafTemplateEngine());
+        get("/raakaaineet", (req, res) -> {
+            HashMap map = new HashMap<>();
+            map.put("raakaaineet", raakaaineDao.findAll());
+            
+
+            return new ModelAndView(map, "raakaaineet");
+        }, new ThymeleafTemplateEngine());
 
         get("/opiskelijat/:id", (req, res) -> {
             HashMap map = new HashMap<>();
