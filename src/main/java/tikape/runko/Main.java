@@ -70,7 +70,7 @@ public class Main {
             return new ModelAndView(map, "raakaaineet");
         }, new ThymeleafTemplateEngine());
         
-        get("/annos", (req, res) -> {
+        get("/:id", (req, res) -> {
             HashMap map = new HashMap<>();
             Integer annosId = Integer.parseInt(req.params(":id"));
             map.put("annos", annosDao.findOne(annosId));
@@ -94,13 +94,13 @@ public class Main {
             return new ModelAndView(map, "annos");
         }, new ThymeleafTemplateEngine());
         
-        get("/:id", (req, res) -> {
+        /*get("/:id", (req, res) -> {
             HashMap map = new HashMap<>();
             map.put("annos", annosDao.findOne(Integer.parseInt(req.params("id"))));
             map.put("annosraakaaineet", annosraakaainedao.findAll());
             map.put("raakaaineet",raakaaineDao.findAll());
             return new ModelAndView(map, "annos");
-        }, new ThymeleafTemplateEngine());
+        }, new ThymeleafTemplateEngine());*/
    
 }
 }

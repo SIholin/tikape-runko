@@ -37,9 +37,9 @@ public class RaakaAineDao implements Dao<RaakaAine, Integer> {
         return raakaaine;
     }
     
-    public List<RaakaAine> raakaineetannokselle(Integer annosId) throws SQLException {
-        String kysely = "SELECT RaakaAine.id, RaakaAine.nimi FROM RaakaAine, AnnosRaakaAine\n"
-        + "              WHERE Annos.id = AnnosRaakaAine.annos_id "
+    public List<String> raakaineetannokselle(Integer annosId) throws SQLException {
+        String kysely = "SELECT RaakaAine.id, RaakaAine.nimi, AnnosRaakaAine.maara FROM RaakaAine, AnnosRaakaAine\n"
+        + "              WHERE raakaaine.id = AnnosRaakaAine.raakaaine_id "
         + "                  AND AnnosRaakaAine.annos_id = ?\n";
         
         List<RaakaAine> raakaaineet = new ArrayList<>();
@@ -54,7 +54,25 @@ public class RaakaAineDao implements Dao<RaakaAine, Integer> {
             }
         }
         
-        return tehtavat;
+        List<String> raakaineetjamaara = new ArrayList<>();
+        for (int i = 0; i< raakaaineet.size(); i++) {
+            String maara = raakaaineenmaara(raakaaineet.get(i));
+            raakaineetjamaara.add(raakaaineet.get(i).getNimi()+ ", " + maara);
+            
+        }
+        
+        return raakaineetjamaara;
+    }
+    
+    public String raakaaineenmaara(RaakaAine raakaaine) throws SQLException {
+        String kysely = "SELECT AnnosRaakaAine.maara FROM AnnosRaakaAine, RaakaAine WHERE RaakaAine.id = ? AND AnnosRaakaAine.raakaaine_id = RaakaAine.id";
+        
+        try (Connection conn = database.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement(kysely);
+            stmt.setInt(1, raakaaine.getId());
+            ResultSet result = stmt.executeQuery();
+            return result.getString("maara");
+        }
     }
 
     @Override
