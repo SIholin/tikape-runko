@@ -77,6 +77,16 @@ public class Main {
 
             return new ModelAndView(map, "raakaaineet");
         }, new ThymeleafTemplateEngine());
+        
+        get("/annos", (req, res) -> {
+            HashMap map = new HashMap<>();
+            Integer annosId = Integer.parseInt(req.params(":id"));
+            map.put("annos", annosDao.findOne(annosId));
+            map.put("raakaaineet", raakaaineDao.raakaineetannokselle(annosId));
+            return new ModelAndView(map, "annos");
+        }, new ThymeleafTemplateEngine());
+                
+                
 
         get("/opiskelijat/:id", (req, res) -> {
             HashMap map = new HashMap<>();

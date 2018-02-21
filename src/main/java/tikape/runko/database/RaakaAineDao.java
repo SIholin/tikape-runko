@@ -36,6 +36,26 @@ public class RaakaAineDao implements Dao<RaakaAine, Integer> {
 
         return raakaaine;
     }
+    
+    public List<RaakaAine> raakaineetannokselle(Integer annosId) throws SQLException {
+        String kysely = "SELECT RaakaAine.id, RaakaAine.nimi FROM RaakaAine, AnnosRaakaAine\n"
+        + "              WHERE Annos.id = AnnosRaakaAine.annos_id "
+        + "                  AND AnnosRaakaAine.annos_id = ?\n";
+        
+        List<RaakaAine> raakaaineet = new ArrayList<>();
+        
+        try (Connection conn = database.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement(kysely);
+            stmt.setInt(1, annosId);
+            ResultSet result = stmt.executeQuery();
+            
+            while (result.next()) {
+                raakaaineet.add(new RaakaAine(result.getInt("id"), result.getString("nimi")));
+            }
+        }
+        
+        return tehtavat;
+    }
 
     @Override
     public List<RaakaAine> findAll() throws SQLException {

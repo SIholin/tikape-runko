@@ -12,8 +12,9 @@
         <p>Annoksen ohje: <span th:text="${annos.ohje}">ohje</span></p>
         <p>Annoksen ainesosat:</p>
         <ol>
-            <li th:each="annosraakaaine: ${annosraakaaineet}">
-                <span th:text="${annosraakaaine.maara}">raaka-aineen id</span>
+            <li th:each="raakaaine: ${raakaaineet}">
+                <span th:text="${raakaaine.nimi}">raaka-aineen nimi</span>
+                
             </li>
         </ol>
     </body>
