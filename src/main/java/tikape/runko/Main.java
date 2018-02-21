@@ -57,8 +57,10 @@ public class Main {
         get("/annokset", (req, res) -> {
             HashMap map = new HashMap<>();
             map.put("annokset", annosDao.findAll());
+            map.put("raakaaineet", raakaaineDao.findAll());
 
             return new ModelAndView(map, "annokset");
+            
         }, new ThymeleafTemplateEngine());
         
         get("/raakaaineet", (req, res) -> {
