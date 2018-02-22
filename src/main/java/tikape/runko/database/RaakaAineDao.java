@@ -55,11 +55,6 @@ public class RaakaAineDao implements Dao<RaakaAine, Integer> {
         }
         
 
-<<<<<<< HEAD
-
-=======
-        
->>>>>>> 3063d3f3456854722f5d387bc85f75b92f1c75e8
 
         List<String> raakaineetjamaara = new ArrayList<>();
         for (int i = 0; i< raakaaineet.size(); i++) {
@@ -80,10 +75,7 @@ public class RaakaAineDao implements Dao<RaakaAine, Integer> {
             ResultSet result = stmt.executeQuery();
             return result.getString("maara");
         }
-<<<<<<< HEAD
 
-=======
->>>>>>> 3063d3f3456854722f5d387bc85f75b92f1c75e8
     }
 
     @Override

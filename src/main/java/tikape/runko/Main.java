@@ -92,11 +92,7 @@ public class Main {
             
             
         }, new ThymeleafTemplateEngine());
-<<<<<<< HEAD
 
-=======
-        
->>>>>>> 3063d3f3456854722f5d387bc85f75b92f1c75e8
 
         Spark.post("/raakaaineet", (req, res) -> {
             
@@ -132,15 +128,11 @@ public class Main {
         });
 
         
-<<<<<<< HEAD
-     
-        get("/:id", (req, res) -> {
 
-=======
         
      
         get("/:id", (req, res) -> {
->>>>>>> 3063d3f3456854722f5d387bc85f75b92f1c75e8
+
             HashMap map = new HashMap<>();
             Integer annosId = Integer.parseInt(req.params(":id"));
             map.put("annos", annosDao.findOne(annosId));
