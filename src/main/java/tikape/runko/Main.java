@@ -93,6 +93,7 @@ public class Main {
             
         }, new ThymeleafTemplateEngine());
 
+
         Spark.post("/raakaaineet", (req, res) -> {
             
            
@@ -109,23 +110,25 @@ public class Main {
             return "";
         });
 //        
-        
-//        Spark.post("/raakaaineet", (req, res) -> {
-//            
-//            String nimi = req.queryParams("nimi");
-//            List<RaakaAine> raakaaineett = raakaaineDao.findAll();
-//            int i = 0;
-//            while(i < raakaaineett.size()) {
-//                if (raakaaineett.get(i).getNimi().equals(nimi)) {
-//                    raakaaineDao.delete(raakaaineett.get(i).getId());
-//                }
-//                i ++;
-//            }
-//            
-//            res.redirect("/raakaaineet");
-//            return "";
-//        });
 
+        Spark.post("/raakaaineet", (req, res) -> {
+            
+            String nimi = req.queryParams("nimi");
+            List<RaakaAine> raakaaineett = raakaaineDao.findAll();
+            int i = 0;
+            while(i < raakaaineett.size()) {
+                if (raakaaineett.get(i).getNimi().equals(nimi)) {
+                    raakaaineDao.delete(raakaaineett.get(i).getId());
+                }
+                i ++;
+            }
+            
+            res.redirect("/raakaaineet");
+            return "";
+        });
+
+        
+     
         get("/:id", (req, res) -> {
 
             HashMap map = new HashMap<>();

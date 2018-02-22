@@ -56,6 +56,7 @@ public class RaakaAineDao implements Dao<RaakaAine, Integer> {
         
 
 
+
         List<String> raakaineetjamaara = new ArrayList<>();
         for (int i = 0; i< raakaaineet.size(); i++) {
             String maara = raakaaineenmaara(raakaaineet.get(i));
