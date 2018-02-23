@@ -72,7 +72,33 @@ public class Main {
             return new ModelAndView(map, "annokset");
             
         }, new ThymeleafTemplateEngine());
-       
+        
+        Spark.post("/annokset", (req, res) -> {
+             
+            String nimi = req.queryParams("nimi");
+            String ohje = req.queryParams("ohje");
+            
+            annosDao.saveOrUpdate(new Annos(null, nimi, ohje));
+          
+           
+            
+            
+            res.redirect("/annokset");
+            return "";
+        });
+        
+        
+        Spark.post("/poista/:id", (req, res) -> {
+            // avaa yhteys tietokantaan
+            int i = Integer.parseInt(req.params(":id"));
+
+            annosDao.delete(i);
+            
+
+            res.redirect("/annokset");
+            return "";
+        });
+
         
 //        get("/raakaaineet", (req, res) -> {
 //            HashMap map = new HashMap<>();
@@ -176,7 +202,6 @@ public class Main {
             return new ModelAndView(map, "annos");
         }, new ThymeleafTemplateEngine());*/
       
-        
-   
+
 }
 }

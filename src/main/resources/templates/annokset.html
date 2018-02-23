@@ -11,18 +11,21 @@
 
         <ul>
             <li th:each="annos: ${annokset}">
-                <span th:text="${annos.nimi}">drinkin nimi</span> <a th:href="${'/annokset/' + annos.id}">(poista)</a>
+                <span th:text="${annos.nimi}">drinkin nimi</span> 
+                 <form th:action="@{~/poista/{id}(id=${annos.id})}" method="POST">
+                    <input type="submit" value="Poista"/>
+                </form>
             </li>
         </ul>
         
         <h4>Lisää uusi</h4>
         
-        <form method="POST" action="/opiskelijat">
+        <form method="POST" action="">
             <span>Drinkin nimi:</span><br/>
             <input type="text" name="nimi"/><br/>
             Ohje
-            <br>
-            <input type="text">
+            <br/>
+                <input type="text" name="ohje" />
             <br>
             <input type="submit" value="Lisää"/>
         </form>
