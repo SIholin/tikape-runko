@@ -49,7 +49,7 @@ public class Main {
         RaakaAineDao raakaaineDao = new RaakaAineDao(database);
         AnnosRaakaAineDao annosraakaainedao = new AnnosRaakaAineDao(database);
         
-        ArrayList<RaakaAine> raakaaineet = new ArrayList<>();
+        
         
         get("/", (req, res) -> {
             HashMap map = new HashMap<>();
@@ -58,12 +58,7 @@ public class Main {
             return new ModelAndView(map, "index");
         }, new ThymeleafTemplateEngine());
 
-        get("/opiskelijat", (req, res) -> {
-            HashMap map = new HashMap<>();
-            map.put("opiskelijat", annosDao.findAll());
-
-            return new ModelAndView(map, "opiskelijat");
-        }, new ThymeleafTemplateEngine());
+        
 //        
         Spark.get("/annokset", (req, res) -> {
             HashMap map = new HashMap<>();
@@ -79,6 +74,11 @@ public class Main {
             String nimi = req.queryParams("nimi");
             String ohje = req.queryParams("ohje");
             
+            if (nimi.isEmpty()) {
+                res.redirect("/annokset");
+                return "";
+            }
+            
             annosDao.saveOrUpdate(new Annos(null, nimi, ohje));
           
            
@@ -90,7 +90,7 @@ public class Main {
         
         
         Spark.post("/poista/:id", (req, res) -> {
-            // avaa yhteys tietokantaan
+        
             int i = Integer.parseInt(req.params(":id"));
 
             annosDao.delete(i);
@@ -118,14 +118,7 @@ public class Main {
             return "";
         });
         
-//        get("/raakaaineet", (req, res) -> {
-//            HashMap map = new HashMap<>();
-//            map.put("raakaaineet", raakaaineDao.findAll());
-//            
-//
-//            return new ModelAndView(map, "raakaaineet");
-//        }, new ThymeleafTemplateEngine());
-//        
+      
         
         
         Spark.get("/raakaaineet", (req, res) -> {
@@ -145,6 +138,11 @@ public class Main {
             
             String nimi = req.queryParams("nimi");
             
+            if (nimi.isEmpty()) {
+                res.redirect("/raakaaineet");
+                return "";
+            }
+            
             raakaaineDao.saveOrUpdate(new RaakaAine(null, nimi));
           
            
@@ -156,7 +154,7 @@ public class Main {
 //        
 
         Spark.post("/delete/:id", (req, res) -> {
-            // avaa yhteys tietokantaan
+            
             int i = Integer.parseInt(req.params(":id"));
 
             raakaaineDao.delete(i);
@@ -197,12 +195,7 @@ public class Main {
                 
                 
 
-        get("/opiskelijat/:id", (req, res) -> {
-            HashMap map = new HashMap<>();
-            map.put("opiskelija", annosDao.findOne(Integer.parseInt(req.params("id"))));
-
-            return new ModelAndView(map, "opiskelija");
-        }, new ThymeleafTemplateEngine());
+       
         
         get("/annokset/:id", (req, res) -> {
             HashMap map = new HashMap<>();
@@ -211,14 +204,7 @@ public class Main {
             return new ModelAndView(map, "annos");
         }, new ThymeleafTemplateEngine());
         
-        /*get("/:id", (req, res) -> {
-            HashMap map = new HashMap<>();
-            map.put("annos", annosDao.findOne(Integer.parseInt(req.params("id"))));
-            map.put("annosraakaaineet", annosraakaainedao.findAll());
-            map.put("raakaaineet",raakaaineDao.findAll());
-            return new ModelAndView(map, "annos");
-        }, new ThymeleafTemplateEngine());*/
-      
+        
 
 }
 }
