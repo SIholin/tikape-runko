@@ -39,6 +39,7 @@ public class AnnosDao implements Dao<Annos, Integer> {
 
         return annos;
     }
+    
 
     @Override
     public List<Annos> findAll() throws SQLException {
@@ -47,9 +48,7 @@ public class AnnosDao implements Dao<Annos, Integer> {
         List<Annos> annokset = new ArrayList();
         
         ResultSet rs = stmt.executeQuery();
-        if (!rs.next()) {
-            return null;
-        }
+        
         while (rs.next()) {
         Annos ra = new Annos(rs.getInt("id"), rs.getString("nimi"), rs.getString("ohje"));
         annokset.add(ra);
@@ -59,6 +58,7 @@ public class AnnosDao implements Dao<Annos, Integer> {
         rs.close();
 
         conn.close();
+        
 
         return annokset;
     }

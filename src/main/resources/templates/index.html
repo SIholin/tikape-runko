@@ -9,11 +9,10 @@
     <body>
         <h1>Drinkkiarkisto</h1>
 
-        <span th:text="${viesti}">jotain?</span>
         
         <ul>
             <li th:each="annos: ${annokset}">
-                <a th:href="${'/' + annos.id}"><span th:text="${annos.nimi}">annoksen nimi</span> </a>
+                <a th:href="@{~/{id}(id=${annos.id})}"><span th:text="${annos.nimi}">annoksen nimi</span> </a>
             </li>
         </ul>
 

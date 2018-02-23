@@ -85,9 +85,7 @@ public class RaakaAineDao implements Dao<RaakaAine, Integer> {
         List<RaakaAine> raakaaineet = new ArrayList();
         
         ResultSet rs = stmt.executeQuery();
-        if (!rs.next()) {
-            return null;
-        }
+        
         while (rs.next()) {
         RaakaAine ra = new RaakaAine(rs.getInt("id"), rs.getString("nimi"));
         raakaaineet.add(ra);
