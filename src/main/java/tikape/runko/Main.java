@@ -111,6 +111,18 @@ public class Main {
         });
 //        
 
+        Spark.post("/delete/:id", (req, res) -> {
+            // avaa yhteys tietokantaan
+            int i = Integer.parseInt(req.params(":id"));
+
+            raakaaineDao.delete(i);
+            
+
+            res.redirect("/raakaaineet");
+            return "";
+        });
+
+
         Spark.post("/raakaaineet", (req, res) -> {
             
             String nimi = req.queryParams("nimi");
