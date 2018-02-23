@@ -73,6 +73,11 @@ public class Main {
             String nimi = req.queryParams("nimi");
             String ohje = req.queryParams("ohje");
             
+            if (nimi.isEmpty()) {
+                res.redirect("/annokset");
+                return "";
+            }
+            
             annosDao.saveOrUpdate(new Annos(null, nimi, ohje));
           
            
@@ -114,6 +119,11 @@ public class Main {
                 
             
             String nimi = req.queryParams("nimi");
+            
+            if (nimi.isEmpty()) {
+                res.redirect("/raakaaineet");
+                return "";
+            }
             
             raakaaineDao.saveOrUpdate(new RaakaAine(null, nimi));
           
