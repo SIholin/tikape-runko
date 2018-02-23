@@ -2,65 +2,68 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
     <head>
-        <title>Drinkit</title>
+        <title>Drycker</title>
         <meta charset="utf-8" />
     </head>
 
     <body>
-        <h1>Drinkit</h1>
+        <h1>Drycket</h1>
 
         <ul>
             <li th:each="annos: ${annokset}">
-                <span th:text="${annos.nimi}">drinkin nimi</span> <a th:href="${'/annokset/' + annos.id}">(poista)</a>
+                <span th:text="${annos.nimi}">dryck nam</span> 
+                 <form th:action="@{~/poista/{id}(id=${annos.id})}" method="POST">
+                    <input type="submit" value="Radera"/>
+                </form>
             </li>
         </ul>
         
-        <h4>Lisää uusi</h4>
-        
-        <form method="POST" action="/opiskelijat">
-            <span>Drinkin nimi:</span><br/>
-            <input type="text" name="nimi"/><br/>
-            Ohje
-            <br>
-            <input type="text">
-            <br>
-            <input type="submit" value="Lisää"/>
-        </form>
-        
-        <h4>Lisää raaka-aineita</h4>
+        <h4>Lägg till ny</h4>
         
         <form method="POST" action="">
-            Drinkin nimi:
+            <span>Dryck namn:</span><br/>
+            <input type="text" name="nimi"/><br/>
+            Recept
+            <br/>
+                <input type="text" name="ohje" />
+            <br>
+            <input type="submit" value="Lägg"/>
+        </form>
+        
+        <h4>Tillsätt ingredienser</h4>
+        
+        <form method="POST" action="">
+            Dryck namn:
             <br>
                 <select name="drinkki">
                     <option th:each="annos: ${annokset}">
-                        <span th:text="${annos.nimi}">annoksen nimi</span>
+                        <span th:text="${annos.nimi}">dryck namn</span>
                     </option>
                     
                 </select>
             <br>
-            Lisättävä raaka-aine
+            Ingrediens
             <br>
                 <select name="raakaAine">
                     <option th:each="raakaaine: ${raakaaineet}">
-                        <span th:text="${raakaaine.nimi}">raakaaineen nimi</span>
+                        <span th:text="${raakaaine.nimi}">Ingrediens namn</span>
                     </option>
                 </select>
             <br>
-            Järjestys
+            Ordernummer
             <br>
                 <input type="text">
             <br>
-            Määrä
+            Belopp
             <br>
                 <input type="text">
             <br>
-                <input value="Lisää" type="submit">
+                <input value="Lägg" type="submit">
                     
         </form>
         
         <br>
-        <a href="/">Etusivulle</a>
+        <a href="/">Till frontsidan</a>
         
     </body>
 </html>
