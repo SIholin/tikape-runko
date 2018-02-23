@@ -63,8 +63,8 @@ public class Main {
 
             return new ModelAndView(map, "opiskelijat");
         }, new ThymeleafTemplateEngine());
-        
-        get("/annokset", (req, res) -> {
+//        
+        Spark.get("/annokset", (req, res) -> {
             HashMap map = new HashMap<>();
             map.put("annokset", annosDao.findAll());
             map.put("raakaaineet", raakaaineDao.findAll());
@@ -73,7 +73,7 @@ public class Main {
             
         }, new ThymeleafTemplateEngine());
        
-//        
+        
 //        get("/raakaaineet", (req, res) -> {
 //            HashMap map = new HashMap<>();
 //            map.put("raakaaineet", raakaaineDao.findAll());
@@ -175,6 +175,8 @@ public class Main {
             map.put("raakaaineet",raakaaineDao.findAll());
             return new ModelAndView(map, "annos");
         }, new ThymeleafTemplateEngine());*/
+      
+        
    
 }
 }
