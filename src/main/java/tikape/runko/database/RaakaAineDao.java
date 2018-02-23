@@ -36,6 +36,47 @@ public class RaakaAineDao implements Dao<RaakaAine, Integer> {
 
         return raakaaine;
     }
+    
+    public List<String> raakaineetannokselle(Integer annosId) throws SQLException {
+        String kysely = "SELECT RaakaAine.id, RaakaAine.nimi, AnnosRaakaAine.maara FROM RaakaAine, AnnosRaakaAine\n"
+        + "              WHERE raakaaine.id = AnnosRaakaAine.raakaaine_id "
+        + "                  AND AnnosRaakaAine.annos_id = ?\n";
+        
+        List<RaakaAine> raakaaineet = new ArrayList<>();
+        
+        try (Connection conn = database.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement(kysely);
+            stmt.setInt(1, annosId);
+            ResultSet result = stmt.executeQuery();
+            
+            while (result.next()) {
+                raakaaineet.add(new RaakaAine(result.getInt("id"), result.getString("nimi")));
+            }
+        }
+        
+
+
+        List<String> raakaineetjamaara = new ArrayList<>();
+        for (int i = 0; i< raakaaineet.size(); i++) {
+            String maara = raakaaineenmaara(raakaaineet.get(i));
+            raakaineetjamaara.add(raakaaineet.get(i).getNimi()+ ", " + maara);
+            
+        }
+        
+        return raakaineetjamaara;
+    }
+    
+    public String raakaaineenmaara(RaakaAine raakaaine) throws SQLException {
+        String kysely = "SELECT AnnosRaakaAine.maara FROM AnnosRaakaAine, RaakaAine WHERE RaakaAine.id = ? AND AnnosRaakaAine.raakaaine_id = RaakaAine.id";
+        
+        try (Connection conn = database.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement(kysely);
+            stmt.setInt(1, raakaaine.getId());
+            ResultSet result = stmt.executeQuery();
+            return result.getString("maara");
+        }
+
+    }
 
     @Override
     public List<RaakaAine> findAll() throws SQLException {
@@ -108,7 +149,7 @@ public class RaakaAineDao implements Dao<RaakaAine, Integer> {
     private RaakaAine update(RaakaAine object) throws SQLException {
         
         Connection conn = database.getConnection();
-        PreparedStatement stmt = conn.prepareStatement("UPDATE RaakaAine SET" + "nimi = ? WHERE id = ?");
+        PreparedStatement stmt = conn.prepareStatement("UPDATE RaakaAine SET " + "nimi = ? WHERE id = ?");
         stmt.setString(1, object.getNimi());
         stmt.setInt(2, object.getId());
         

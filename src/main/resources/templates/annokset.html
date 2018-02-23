@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
     <head>
-        <title>Otsikko</title>
+        <title>Drinkit</title>
         <meta charset="utf-8" />
     </head>
 
@@ -20,6 +20,10 @@
         <form method="POST" action="/opiskelijat">
             <span>Drinkin nimi:</span><br/>
             <input type="text" name="nimi"/><br/>
+            Ohje
+            <br>
+            <input type="text">
+            <br>
             <input type="submit" value="Lisää"/>
         </form>
         
@@ -51,16 +55,12 @@
             <br>
                 <input type="text">
             <br>
-            Ohje
-            <br>
-                <input type="text">
-            <br>
                 <input value="Lisää" type="submit">
                     
         </form>
         
         <br>
-        <a href="/index">Etusivulle</a>
+        <a href="/">Etusivulle</a>
         
     </body>
 </html>
