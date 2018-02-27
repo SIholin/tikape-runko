@@ -102,35 +102,35 @@ public class Main {
 
           
         Spark.post("/lisaaminen", (req, res) -> {
-            int aine = Integer.parseInt(req.queryParams("raakaAine"));
-            int drinkki = Integer.parseInt(req.queryParams("drinkki"));
-//            List<RaakaAine> jotain = raakaaineDao.findAll();
-//         
-//            List<Annos> tama = annosDao.findAll();
-//            
-//            int aine = -1;
-//            
-//            int k = 0;
-//            while (k < jotain.size()) {
-//                if (jotain.get(k).getNimi() == j) {
-//                    aine = jotain.get(k).getId();
-//                    break;
-//                }
-//                
-//                k ++;
-//            }
-//            
-//              int drinkki = -1;
-//            
-//            int p = 0;
-//            while (k < tama.size()) {
-//                if (tama.get(k).getNimi() == i) {
-//                    drinkki = tama.get(k).getId();
-//                    break;
-//                }
-//                
-//                p ++;
-//            }
+            String j = req.queryParams("raakaAine");
+            String i = req.queryParams("drinkki");
+            List<RaakaAine> raakaaineet = raakaaineDao.findAll();
+         
+            List<Annos> drinkit = annosDao.findAll();
+            
+            int aine = -1;
+            
+            int k = 0;
+            while (k < raakaaineet.size()) {
+                if (raakaaineet.get(k).getNimi().equals(j)) {
+                    aine = raakaaineet.get(k).getId();
+                    break;
+                }
+                
+                k ++;
+            }
+            
+              int drinkki = -1;
+            
+            int p = 0;
+            while (p < drinkit.size()) {
+                if (drinkit.get(p).getNimi().equals(i)) {
+                    drinkki = drinkit.get(p).getId();
+                    break;
+                }
+                
+                p ++;
+            }
             String maara = req.queryParams("maara");
             int jarjestys = Integer.parseInt(req.queryParams("jarjestys"));
        

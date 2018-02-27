@@ -37,7 +37,7 @@
             <br>
                 <select name="drinkki">
                     <option th:each="annos: ${annokset}">
-                        <span th:text="${annos.id}">annoksen nimi</span>
+                        <span th:text="${annos.nimi}">annoksen nimi</span>
                     </option>
                     
                 </select>
@@ -46,7 +46,7 @@
             <br>
                 <select name="raakaAine">
                     <option th:each="raakaaine: ${raakaaineet}">
-                        <span th:text="${raakaaine.id}">raakaaineen nimi</span>
+                        <span th:text="${raakaaine.nimi}">raakaaineen nimi</span>
                     </option>
                 </select>
             <br>
