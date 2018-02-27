@@ -39,15 +39,11 @@
             <br>
                 <select name="drinkki">
                     <option th:each="annos: ${annokset}">
-<<<<<<< HEAD
-<<<<<<< HEAD
+
                         <span th:text="${annos.nimi}">annoksen nimi</span>
-=======
-        <span th:text="${annos.id}">dryck namn</span>
->>>>>>> 286910f92a05b0281cba2a5b01dbb019594a5f2b
-=======
-        <span th:text="${annos.id}">dryck namn</span>
->>>>>>> 286910f92a05b0281cba2a5b01dbb019594a5f2b
+
+    
+
                     </option>
                     
                 </select>
@@ -56,19 +52,16 @@
             <br>
                 <select name="raakaAine">
                     <option th:each="raakaaine: ${raakaaineet}">
-<<<<<<< HEAD
-<<<<<<< HEAD
-                        <span th:text="${raakaaine.nimi}">raakaaineen nimi</span>
-=======
+
+
+                     
+
                         
-                        <span th:text="${raakaaine.id}">Ingrediens namn</span>
+                        <span th:text="${raakaaine.nimi}">Ingrediens namn</span>
                         
->>>>>>> 286910f92a05b0281cba2a5b01dbb019594a5f2b
-=======
-                        
-                        <span th:text="${raakaaine.id}">Ingrediens namn</span>
-                        
->>>>>>> 286910f92a05b0281cba2a5b01dbb019594a5f2b
+
+                      
+
                     </option>
                 </select>
             <br>
@@ -81,10 +74,17 @@
             <br>
                 
                      <input type="text" name="maara">
+            
+            <br>
+            Tilläggsinstruktioner
+            <br>
+                <input type="text" name="lisaohje">
 
             <br>
                 <input value="Lägg" type="submit">
+            
                     
+           
         </form>
         
         <br>

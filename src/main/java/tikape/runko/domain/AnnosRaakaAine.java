@@ -7,14 +7,18 @@ public class AnnosRaakaAine {
     private Integer jarjestys;
     private Integer annosId;
     private Integer raakaaineId;
+    private String lisaohje;
     
-    public AnnosRaakaAine(Integer annosId, Integer raakaaineId, Integer jarjestys, String maara) {
+    public AnnosRaakaAine(Integer annosId, Integer raakaaineId, Integer jarjestys, String maara, String lisaohje) {
         this.annosId = annosId;
         this.raakaaineId = raakaaineId;
         this.jarjestys = jarjestys;
         this.maara = maara;
+        this.lisaohje = lisaohje;
     }
-    
+    public String getLisaohje() {
+        return this.lisaohje;
+    }
     public Integer getAnnosId() {
         return this.annosId;
     }

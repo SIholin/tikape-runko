@@ -38,7 +38,7 @@ public class RaakaAineDao implements Dao<RaakaAine, Integer> {
     }
     
     public List<String> raakaineetannokselle(Integer annosId) throws SQLException {
-        String kysely = "SELECT RaakaAine.id, RaakaAine.nimi, AnnosRaakaAine.maara FROM RaakaAine, AnnosRaakaAine\n"
+        String kysely = "SELECT RaakaAine.id, RaakaAine.nimi, AnnosRaakaAine.maara, AnnosRaakaAine.lisaohje FROM RaakaAine, AnnosRaakaAine\n"
         + "              WHERE raakaaine.id = AnnosRaakaAine.raakaaine_id "
         + "                  AND AnnosRaakaAine.annos_id = ?\n";
         
@@ -59,7 +59,8 @@ public class RaakaAineDao implements Dao<RaakaAine, Integer> {
         List<String> raakaineetjamaara = new ArrayList<>();
         for (int i = 0; i< raakaaineet.size(); i++) {
             String maara = raakaaineenmaara(raakaaineet.get(i));
-            raakaineetjamaara.add(raakaaineet.get(i).getNimi()+ ", " + maara);
+            String lisaohje = raakaaineenohje(raakaaineet.get(i));
+            raakaineetjamaara.add(raakaaineet.get(i).getNimi()+ ", " + maara + ", lisäohje: " + lisaohje);
             
         }
         
@@ -158,5 +159,17 @@ public class RaakaAineDao implements Dao<RaakaAine, Integer> {
         
         return object;
     }
+    
+     public String raakaaineenohje(RaakaAine raakaaine) throws SQLException {
+        String kysely = "SELECT AnnosRaakaAine.lisaohje FROM AnnosRaakaAine, RaakaAine WHERE RaakaAine.id = ? AND AnnosRaakaAine.raakaaine_id = RaakaAine.id";
+        
+        try (Connection conn = database.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement(kysely);
+            stmt.setInt(1, raakaaine.getId());
+            ResultSet result = stmt.executeQuery();
+            return result.getString("lisaohje");
+        }
+
+     }
     
 }
