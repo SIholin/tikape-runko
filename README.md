@@ -1,4 +1,5 @@
 # tikape-runko
 
-Tietokantojen perusteet -kurssilla tehtävän web-sovelluksen pohja.
+
+Drinkarchive för att lägga och titta till drycker, recept och ingredienser
 
