@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import tikape.runko.domain.AnnosRaakaAine;
+import tikape.runko.domain.RaakaAine;
 
 
 public class AnnosRaakaAineDao implements Dao<AnnosRaakaAine, Integer> {
@@ -88,12 +89,66 @@ public class AnnosRaakaAineDao implements Dao<AnnosRaakaAine, Integer> {
 
     @Override
     public void delete(Integer key) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+           Connection conn = database.getConnection();
+        PreparedStatement stmt = conn.prepareStatement("DELETE FROM AnnosRaakaAine WHERE annos_id = ? AND raakaaine_id = ?");
+
+        stmt.setInt(1, key);
+        stmt.executeUpdate();
+
+        stmt.close();
+        conn.close();
     }
 
     @Override
     public AnnosRaakaAine saveOrUpdate(AnnosRaakaAine object) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (object.getAnnosId() == null) {
+            return save(object);
+        } else {
+            return update(object);
+        }
     }
     
+        private AnnosRaakaAine save(AnnosRaakaAine object) throws SQLException {
+        Connection conn = database.getConnection();
+        PreparedStatement stmt = conn.prepareStatement("INSERT INTO AnnosRaakaAine" + "(annos_id, raakaaine_id, jarjestys, maara)" + "VALUES (?, ?)");
+        stmt.setInt(1, object.getAnnosId());
+        stmt.setInt(2, object.getRaakaaineId());
+        stmt.setInt(3, object.getJarjestys());
+        stmt.setString(4, object.getMaara());
+        stmt.executeUpdate();
+        stmt.close();
+        
+        stmt = conn.prepareStatement("SELECT * FROM AnnnosRaakaAine WHERE annos_id = ? AND raakaaine_id = ? AND jarjestys = ? AND maara = ?");
+        stmt.setInt(1, object.getJarjestys());
+        stmt.setString(2, object.getMaara());
+        
+        ResultSet rs = stmt.executeQuery();
+        rs.next();
+        
+        AnnosRaakaAine ara = new AnnosRaakaAine(rs.getInt("annos_id"), rs.getInt("raakaaine_id"), rs.getInt("jarjestys"), rs.getString("maara"));
+        
+        stmt.close();
+        rs.close();
+        conn.close();
+        return ara;
+        
+        
+    }
+    
+    private AnnosRaakaAine update(AnnosRaakaAine object) throws SQLException {
+        
+        Connection conn = database.getConnection();
+        PreparedStatement stmt = conn.prepareStatement("UPDATE AnnosRaakaAine SET " + "jarjestys = ?, maara = ? WHERE annos_id = ? AND raakaaine_id = ?");
+        stmt.setInt(1, object.getJarjestys());
+        stmt.setString(2, object.getMaara());
+        stmt.setInt(3, object.getAnnosId());
+        stmt.setInt(4, object.getRaakaaineId());
+        
+        stmt.executeUpdate();
+        
+        stmt.close();
+        conn.close();
+        
+        return object;
+    }
 }

@@ -18,6 +18,7 @@ import tikape.runko.database.RaakaAineDao;
 import tikape.runko.domain.Annos;
 
 import tikape.runko.database.AnnosRaakaAineDao;
+import tikape.runko.domain.AnnosRaakaAine;
 import tikape.runko.domain.RaakaAine;
 
 public class Main {
@@ -99,6 +100,23 @@ public class Main {
             return "";
         });
 
+          
+        Spark.post("/annokset", (req, res) -> {
+            
+//            ArrayList<RaakaAine> jotain = new ArrayList<>();
+//            ArrayList<Annos> tama = new ArrayList<>();
+//            while
+            
+            int i = Integer.parseInt(req.params("drinkki"));
+            int j = Integer.parseInt(req.params("raakaAine"));
+            
+            Integer jarjestys = Integer.parseInt(req.params("jarjestys"));
+            String maara = req.params("maara");
+            
+            annosraakaainedao.saveOrUpdate(new AnnosRaakaAine(i, j, jarjestys, maara));
+             res.redirect("/annokset");
+            return "";
+        });
         
       
         
@@ -163,8 +181,7 @@ public class Main {
             return "";
         });
 
-        
-
+      
         
      
         get("/:id", (req, res) -> {

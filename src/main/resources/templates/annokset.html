@@ -37,7 +37,7 @@
             <br>
                 <select name="drinkki">
                     <option th:each="annos: ${annokset}">
-                        <span th:text="${annos.nimi}">dryck namn</span>
+        <span th:text="${annos.id}">dryck namn</span>
                     </option>
                     
                 </select>
@@ -46,17 +46,19 @@
             <br>
                 <select name="raakaAine">
                     <option th:each="raakaaine: ${raakaaineet}">
-                        <span th:text="${raakaaine.nimi}">Ingrediens namn</span>
+                        
+                        <span th:text="${raakaaine.id}">Ingrediens namn</span>
+                        
                     </option>
                 </select>
             <br>
             Ordernummer
             <br>
-                <input type="text">
+                <input type="text" name="jarjestys">
             <br>
             Belopp
             <br>
-                <input type="text">
+                <input type="text" name="maara">
             <br>
                 <input value="Lägg" type="submit">
                     
