@@ -67,7 +67,7 @@ public class AnnosDao implements Dao<Annos, Integer> {
     }
     
     public int annoksetRaakaaineelle(int raakaaineid) throws SQLException {
-        String kysely = "SELECT Annos.id, Annos.nimi FROM Annos, AnnosRaakaAine\n"
+        String kysely = "SELECT Annos.id, Annos.nimi, Annos.ohje FROM Annos, AnnosRaakaAine\n"
                 + "              WHERE annos.id = AnnosRaakaAine.annos_id "
                 + "                  AND AnnosRaakaAine.raakaaine_id = ?\n";
 
