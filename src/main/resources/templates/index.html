@@ -9,13 +9,6 @@
     <body>
         <h1>Dryckarkiv</h1>
 
-        
-        <ul>
-            <li th:each="annos: ${annokset}">
-                <a th:href="@{~/{id}(id=${annos.id})}"><span th:text="${annos.nimi}">dryck namn</span> </a>
-            </li>
-        </ul>
-
         <p><a href="/annokset">Härifrån för dryckar</a></p>
         <p><a href="/raakaaineet">Härifrån för ingrediens</a></p>
         
