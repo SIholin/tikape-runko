@@ -143,15 +143,12 @@ public class Main {
             int jarjestys = Integer.parseInt(req.queryParams("jarjestys"));
             String lisaohje = req.queryParams("lisaohje");
        
-<<<<<<< HEAD
+
             annosraakaainedao.saveOrUpdate(new AnnosRaakaAine(drinkki, aine, jarjestys, maara, lisaohje));
              res.redirect("/annokset");
-=======
 
-            
-            annosraakaainedao.saveOrUpdate(new AnnosRaakaAine(drinkki, aine, jarjestys, maara));
-            res.redirect("/annokset");
->>>>>>> dda859acf05591dcd1cd19805bf6f69f617b894d
+
+          
             return "";
         });
         

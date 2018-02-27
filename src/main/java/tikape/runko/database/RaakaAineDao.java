@@ -37,17 +37,14 @@ public class RaakaAineDao implements Dao<RaakaAine, Integer> {
     }
 
     public List<String> raakaineetannokselle(Integer annosId) throws SQLException {
-<<<<<<< HEAD
+
         String kysely = "SELECT RaakaAine.id, RaakaAine.nimi, AnnosRaakaAine.maara, AnnosRaakaAine.lisaohje FROM RaakaAine, AnnosRaakaAine\n"
         + "              WHERE raakaaine.id = AnnosRaakaAine.raakaaine_id "
         + "                  AND AnnosRaakaAine.annos_id = ?\n";
         
-=======
-        String kysely = "SELECT RaakaAine.id, RaakaAine.nimi FROM RaakaAine, AnnosRaakaAine\n"
-                + "              WHERE raakaaine.id = AnnosRaakaAine.raakaaine_id "
-                + "                  AND AnnosRaakaAine.annos_id = ?\n";
 
->>>>>>> dda859acf05591dcd1cd19805bf6f69f617b894d
+
+
         List<RaakaAine> raakaaineet = new ArrayList<>();
 
         try (Connection conn = database.getConnection()) {
@@ -72,7 +69,8 @@ public class RaakaAineDao implements Dao<RaakaAine, Integer> {
             for (int j = 0; j < raakaaineet.size(); j++) {
                 if (raakaaineenjarjestys(raakaaineet.get(j)) == pienin) {
                     String maara = raakaaineenmaara(raakaaineet.get(j));
-                    raakaaineetjamaara.add(pienin + ". " + raakaaineet.get(j).getNimi() + ", " + maara);
+                    String lisaohje = raakaaineenohje(raakaaineet.get(j));
+                    raakaaineetjamaara.add(pienin + ". " + raakaaineet.get(j).getNimi() + ", " + maara + ", Tilläggsinstruktioner: " + lisaohje);
                     
                 }
                 if (j == raakaaineet.size() - 1) {
@@ -83,13 +81,13 @@ public class RaakaAineDao implements Dao<RaakaAine, Integer> {
      
         /*    for (int i = 0; i< raakaaineet.size(); i++) {
             String maara = raakaaineenmaara(raakaaineet.get(i));
-<<<<<<< HEAD
+
             String lisaohje = raakaaineenohje(raakaaineet.get(i));
             raakaineetjamaara.add(raakaaineet.get(i).getNimi()+ ", " + maara + ", lisäohje: " + lisaohje);
-=======
+
             int jarjestys = raakaaineenjarjestys(raakaaineet.get(i));
             raakaineetjamaara.add(jarjestys + ". " + raakaaineet.get(i).getNimi()+ ", " + maara);
->>>>>>> dda859acf05591dcd1cd19805bf6f69f617b894d
+
             
         }*/
 
@@ -198,7 +196,7 @@ public class RaakaAineDao implements Dao<RaakaAine, Integer> {
 
         return object;
     }
-<<<<<<< HEAD
+
     
      public String raakaaineenohje(RaakaAine raakaaine) throws SQLException {
         String kysely = "SELECT AnnosRaakaAine.lisaohje FROM AnnosRaakaAine, RaakaAine WHERE RaakaAine.id = ? AND AnnosRaakaAine.raakaaine_id = RaakaAine.id";
@@ -211,8 +209,5 @@ public class RaakaAineDao implements Dao<RaakaAine, Integer> {
         }
 
      }
-    
-=======
 
->>>>>>> dda859acf05591dcd1cd19805bf6f69f617b894d
 }
