@@ -66,12 +66,15 @@ public class RaakaAineDao implements Dao<RaakaAine, Integer> {
             }
            
             for (int j = 0; j < raakaaineet.size(); j++) {
-                if (raakaaineenjarjestys(raakaaineet.get(j)) == pienin) {
-                    String maara = raakaaineenmaara(raakaaineet.get(j));
+                if (raakaaineenjarjestys(raakaaineet.get(j), annosId) == pienin) {
+                    String maara = raakaaineenmaara(raakaaineet.get(j), annosId);
                     String lisaohje = raakaaineenohje(raakaaineet.get(j));
 
-                    raakaaineetjamaara.add(pienin + ". " + raakaaineet.get(j).getNimi() + ", " + maara + ", Tilläggsinstruktioner: " + lisaohje);
-
+                    if (lisaohje.isEmpty()) {
+                        raakaaineetjamaara.add(raakaaineet.get(j).getNimi() + ": " + maara + ".");
+                    } else {
+                       raakaaineetjamaara.add(raakaaineet.get(j).getNimi() + ": " + maara + ". Tilläggsinstruktioner: " + lisaohje);
+                    }
                     
                 }
                 if (j == raakaaineet.size() - 1) {
@@ -85,23 +88,25 @@ public class RaakaAineDao implements Dao<RaakaAine, Integer> {
         return raakaaineetjamaara;
     }
 
-    public int raakaaineenjarjestys(RaakaAine raakaaine) throws SQLException {
-        String kysely = "SELECT AnnosRaakaAine.jarjestys FROM AnnosRaakaAine, RaakaAine WHERE RaakaAine.id = ? AND AnnosRaakaAine.raakaaine_id = RaakaAine.id";
+    public int raakaaineenjarjestys(RaakaAine raakaaine, int annosId) throws SQLException {
+        String kysely = "SELECT AnnosRaakaAine.jarjestys FROM AnnosRaakaAine, RaakaAine, Annos WHERE RaakaAine.id = ? AND AnnosRaakaAine.raakaaine_id = RaakaAine.id AND Annos.id = ? AND Annos.id = AnnosRaakaAine.annos_id";
 
         try (Connection conn = database.getConnection()) {
             PreparedStatement stmt = conn.prepareStatement(kysely);
             stmt.setInt(1, raakaaine.getId());
+            stmt.setInt(2, annosId);
             ResultSet result = stmt.executeQuery();
             return result.getInt("jarjestys");
         }
     }
 
-    public String raakaaineenmaara(RaakaAine raakaaine) throws SQLException {
-        String kysely = "SELECT AnnosRaakaAine.maara FROM AnnosRaakaAine, RaakaAine WHERE RaakaAine.id = ? AND AnnosRaakaAine.raakaaine_id = RaakaAine.id";
+    public String raakaaineenmaara(RaakaAine raakaaine, int annosId) throws SQLException {
+        String kysely = "SELECT AnnosRaakaAine.maara FROM AnnosRaakaAine, RaakaAine, Annos WHERE RaakaAine.id = ? AND AnnosRaakaAine.raakaaine_id = RaakaAine.id AND Annos.id = ? AND Annos.id = AnnosRaakaAine.annos_id";
 
         try (Connection conn = database.getConnection()) {
             PreparedStatement stmt = conn.prepareStatement(kysely);
             stmt.setInt(1, raakaaine.getId());
+            stmt.setInt(2, annosId);
             ResultSet result = stmt.executeQuery();
             return result.getString("maara");
         }

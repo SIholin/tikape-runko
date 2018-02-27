@@ -11,13 +11,13 @@
 
         <p>Dryck recept: <span th:text="${annos.ohje}">recept</span></p>
         <p>Dryck Ingrediens:</p>
-        <ul style="list-style-type: none">
+        <ol>
             <li th:each="raakaaine: ${raakaaineet}">
                 <span th:text="${raakaaine}">
 Ingrediens namn</span>
                 
             </li>
-        </ul>
+        </ol>
         
         <br>
         <a href="/">Till frontsidan</a>

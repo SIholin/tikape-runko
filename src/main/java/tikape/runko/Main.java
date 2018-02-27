@@ -199,7 +199,7 @@ public class Main {
             int i = Integer.parseInt(req.params(":id"));
 
             raakaaineDao.delete(i);
-            
+            annosraakaainedao.deleteRaakaaine(i);
 
             res.redirect("/raakaaineet");
             return "";
