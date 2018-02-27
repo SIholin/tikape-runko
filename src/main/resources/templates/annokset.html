@@ -11,8 +11,8 @@
 
         <ul>
             <li th:each="annos: ${annokset}">
-                <a th:href="@{~/{id}(id=${annos.id})}"><span th:text="${annos.nimi}">dryck nam</span></a> 
-                 <form th:action="@{~/poista/{id}(id=${annos.id})}" method="POST">
+                <a th:href="@{~/{id}(id=${annos.id})}"><span th:text="${annos.nimi}">dryck nam</span></a>
+                <form th:action="@{~/poista/{id}(id=${annos.id})}" method="POST">
                     <input type="submit" value="Radera"/>
                 </form>
             </li>

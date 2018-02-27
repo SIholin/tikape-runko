@@ -102,6 +102,7 @@ public class Main {
             int i = Integer.parseInt(req.params(":id"));
 
             annosDao.delete(i);
+            annosraakaainedao.delete(i);
             
 
             res.redirect("/annokset");
