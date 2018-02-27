@@ -91,6 +91,7 @@ public class AnnosRaakaAineDao implements Dao<AnnosRaakaAine, Integer> {
     public void delete(Integer key) throws SQLException {
            Connection conn = database.getConnection();
         PreparedStatement stmt = conn.prepareStatement("DELETE FROM AnnosRaakaAine WHERE annos_id = ?");
+<<<<<<< HEAD
 
         stmt.setInt(1, key);
         stmt.executeUpdate();
@@ -102,6 +103,8 @@ public class AnnosRaakaAineDao implements Dao<AnnosRaakaAine, Integer> {
     public void deleteRaakaaine(Integer key) throws SQLException {
         Connection conn = database.getConnection();
         PreparedStatement stmt = conn.prepareStatement("DELETE FROM AnnosRaakaAine WHERE raakaaine_id = ?");
+=======
+>>>>>>> 5804eaf0192c17030ebed040ce025ef469bcf89b
 
         stmt.setInt(1, key);
         stmt.executeUpdate();
