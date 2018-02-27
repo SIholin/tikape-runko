@@ -2,18 +2,19 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
     <head>
-        <title>Drinkki</title>
+        <title>Dryck</title>
         <meta charset="utf-8" />
     </head>
 
     <body>
-        <h1><span th:text="${annos.nimi}">annos</span>!</h1>
+        <h1><span th:text="${annos.nimi}">Dryck</span>!</h1>
 
-        <p>Annoksen ohje: <span th:text="${annos.ohje}">ohje</span></p>
-        <p>Annoksen ainesosat:</p>
+        <p>Dryck recept: <span th:text="${annos.ohje}">recept</span></p>
+        <p>Dryck Ingrediens:</p>
         <ol>
             <li th:each="raakaaine: ${raakaaineet}">
-                <span th:text="${raakaaine}">raaka-aineen nimi</span>
+                <span th:text="${raakaaine}">
+Ingrediens namn</span>
                 
             </li>
         </ol>

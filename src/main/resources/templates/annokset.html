@@ -2,71 +2,83 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
     <head>
-        <title>Drinkit</title>
+        <title>Drycker</title>
         <meta charset="utf-8" />
     </head>
 
     <body>
-        <h1>Drinkit</h1>
+        <h1>Drycket</h1>
 
         <ul>
             <li th:each="annos: ${annokset}">
-                <span th:text="${annos.nimi}">drinkin nimi</span> 
+                <span th:text="${annos.nimi}">dryck nam</span> 
                  <form th:action="@{~/poista/{id}(id=${annos.id})}" method="POST">
-                    <input type="submit" value="Poista"/>
+                    <input type="submit" value="Radera"/>
                 </form>
             </li>
         </ul>
         
-        <h4>Lisää uusi</h4>
+        <h4>Lägg till ny</h4>
         
         <form method="POST" action="/uusi">
-            <span>Drinkin nimi:</span><br/>
+            <span>Dryck namn:</span><br/>
+            
             <input type="text" name="nimi"/><br/>
-            Ohje
+            Recept
             <br/>
                 <input type="text" name="ohje" />
             <br>
-            <input type="submit" value="Lisää"/>
+            <input type="submit" value="Lägg"/>
         </form>
         
-        <h4>Lisää raaka-aineita</h4>
+        <h4>Tillsätt ingredienser</h4>
         
+
         <form method="POST" action="/lisaaminen">
-            Drinkin nimi:
+            Dryck namn:
             <br>
                 <select name="drinkki">
                     <option th:each="annos: ${annokset}">
+<<<<<<< HEAD
                         <span th:text="${annos.nimi}">annoksen nimi</span>
+=======
+        <span th:text="${annos.id}">dryck namn</span>
+>>>>>>> 286910f92a05b0281cba2a5b01dbb019594a5f2b
                     </option>
                     
                 </select>
             <br>
-            Lisättävä raaka-aine
+            Ingrediens
             <br>
                 <select name="raakaAine">
                     <option th:each="raakaaine: ${raakaaineet}">
+<<<<<<< HEAD
                         <span th:text="${raakaaine.nimi}">raakaaineen nimi</span>
+=======
+                        
+                        <span th:text="${raakaaine.id}">Ingrediens namn</span>
+                        
+>>>>>>> 286910f92a05b0281cba2a5b01dbb019594a5f2b
                     </option>
                 </select>
             <br>
-            Järjestys
+            Ordernummer
             <br>
                <input type="text" name="jarjestys">
                 
             <br>
-            Määrä
+            Belopp
             <br>
                 
                      <input type="text" name="maara">
 
             <br>
-                <input value="Lisää" type="submit">
+                <input value="Lägg" type="submit">
                     
         </form>
         
         <br>
-        <a href="/">Etusivulle</a>
+        <a href="/">Till frontsidan</a>
         
     </body>
 </html>

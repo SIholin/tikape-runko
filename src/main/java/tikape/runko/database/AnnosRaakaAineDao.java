@@ -22,7 +22,7 @@ public class AnnosRaakaAineDao implements Dao<AnnosRaakaAine, Integer> {
     @Override
     public AnnosRaakaAine findOne(Integer key) throws SQLException {
         Connection conn = database.getConnection();
-        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM AnnosRaakaAine WHERE annos_id = ? AND raakaaine_id = ?");
+        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM AnnosRaakaAine WHERE annos_id = ?");
         stmt.setInt(1, key);
 
         ResultSet rs = stmt.executeQuery();
@@ -39,6 +39,29 @@ public class AnnosRaakaAineDao implements Dao<AnnosRaakaAine, Integer> {
         conn.close();
 
         return annosraakaaine;
+    }
+    
+    public List<AnnosRaakaAine> findAllByAnnos(Integer key) throws SQLException {
+        Connection conn = database.getConnection();
+        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM AnnosRaakaAine WHERE annos_id = ?");
+        stmt.setInt(1, key);
+        List<AnnosRaakaAine> annosraakaaineet = new ArrayList();
+        
+        ResultSet rs = stmt.executeQuery();
+        if (!rs.next()) {
+            return null;
+        }
+        while (rs.next()) {
+        AnnosRaakaAine ra = new AnnosRaakaAine(rs.getInt("annos_id"), rs.getInt("raakaaine_id"), rs.getInt("jarjestys"), rs.getString("maara"));
+        annosraakaaineet.add(ra);
+        }
+        
+        stmt.close();
+        rs.close();
+
+        conn.close();
+
+        return annosraakaaineet;
     }
 
     @Override

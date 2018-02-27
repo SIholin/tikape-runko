@@ -229,8 +229,6 @@ public class Main {
 
             return new ModelAndView(map, "annos");
         }, new ThymeleafTemplateEngine());
-        
-        
 
-}
+        }
 }
