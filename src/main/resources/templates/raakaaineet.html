@@ -9,10 +9,10 @@
     <body>
         <h1>
 Ingredienser</h1>
-
+<h4>Klicka på ingrediens för att se hur många drycker som används</h4>
         <ul>
             <li th:each="raakaaine: ${raakaaineet}">
-                <span th:text="${raakaaine.nimi}">raaka-aineen nimi</span> 
+                <a th:href="@{~/raakaaine/{id}(id=${raakaaine.id})}"><span th:text="${raakaaine.nimi}">raaka-aineen nimi</span></a>
                 <form th:action="@{~/delete/{id}(id=${raakaaine.id})}" method="POST">
                     <input type="submit" value="Radera"/>
                 </form>

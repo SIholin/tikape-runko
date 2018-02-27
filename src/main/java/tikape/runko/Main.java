@@ -79,6 +79,14 @@ public class Main {
                 return "";
             }
             
+            List<Annos> annokset = annosDao.findAll();
+            for (int i = 0; i<annokset.size(); i++) {
+                if (nimi.equals(annokset.get(i).getNimi())) {
+                    res.redirect("/annokset");
+                    return "";
+                }
+            }
+            
             annosDao.saveOrUpdate(new Annos(null, nimi, ohje));
           
            
@@ -135,8 +143,15 @@ public class Main {
             int jarjestys = Integer.parseInt(req.queryParams("jarjestys"));
             String lisaohje = req.queryParams("lisaohje");
        
+<<<<<<< HEAD
             annosraakaainedao.saveOrUpdate(new AnnosRaakaAine(drinkki, aine, jarjestys, maara, lisaohje));
              res.redirect("/annokset");
+=======
+
+            
+            annosraakaainedao.saveOrUpdate(new AnnosRaakaAine(drinkki, aine, jarjestys, maara));
+            res.redirect("/annokset");
+>>>>>>> dda859acf05591dcd1cd19805bf6f69f617b894d
             return "";
         });
         
@@ -164,6 +179,16 @@ public class Main {
                 res.redirect("/raakaaineet");
                 return "";
             }
+            
+            List<RaakaAine> raakaaineet = raakaaineDao.findAll();
+            for (int i = 0; i< raakaaineet.size(); i++) {
+                if (nimi.equals(raakaaineet.get(i).getNimi())) {
+                    res.redirect("/raakaaineet");
+                    return "";
+                }
+                    
+            }
+            
             
             raakaaineDao.saveOrUpdate(new RaakaAine(null, nimi));
           
@@ -215,6 +240,15 @@ public class Main {
             return new ModelAndView(map, "annos");
         }, new ThymeleafTemplateEngine());
                 
+        
+        get("/raakaaine/:id", (req, res) -> {
+
+            HashMap map = new HashMap<>();
+            Integer raakaaineId = Integer.parseInt(req.params(":id"));
+            map.put("raakaaine", raakaaineDao.findOne(raakaaineId));
+            map.put("annokset", annosDao.annoksetRaakaaineelle(raakaaineId));
+            return new ModelAndView(map, "raakaaine");
+        }, new ThymeleafTemplateEngine());
                 
 
        

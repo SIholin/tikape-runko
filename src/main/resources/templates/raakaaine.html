@@ -7,14 +7,13 @@
     </head>
 
     <body>
-        <h1><span th:text="${annos.nimi}">Dryck</span>!</h1>
+        <h1><span th:text="${raakaaine.nimi}">raaka-aine</span>!</h1>
 
-        <p>Dryck recept: <span th:text="${annos.ohje}">recept</span></p>
-        <p>Dryck Ingrediens:</p>
+        <p>Används i detta många drycker</p>
         <ul style="list-style-type: none">
-            <li th:each="raakaaine: ${raakaaineet}">
-                <span th:text="${raakaaine}">
-Ingrediens namn</span>
+            <li th:each="annos: ${annokset}">
+                <span th:text="${annos}">
+Dryk namn</span>
                 
             </li>
         </ul>
