@@ -147,8 +147,11 @@ public class Main {
             annosraakaainedao.saveOrUpdate(new AnnosRaakaAine(drinkki, aine, jarjestys, maara, lisaohje));
              res.redirect("/annokset");
 
+<<<<<<< HEAD
 
           
+=======
+>>>>>>> f4e5be302e7366e7628c1484b64640a599a2dcfa
             return "";
         });
         

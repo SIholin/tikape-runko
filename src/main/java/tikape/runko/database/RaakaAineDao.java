@@ -38,6 +38,7 @@ public class RaakaAineDao implements Dao<RaakaAine, Integer> {
 
     public List<String> raakaineetannokselle(Integer annosId) throws SQLException {
 
+<<<<<<< HEAD
         String kysely = "SELECT RaakaAine.id, RaakaAine.nimi, AnnosRaakaAine.maara, AnnosRaakaAine.lisaohje FROM RaakaAine, AnnosRaakaAine\n"
         + "              WHERE raakaaine.id = AnnosRaakaAine.raakaaine_id "
         + "                  AND AnnosRaakaAine.annos_id = ?\n";
@@ -45,6 +46,13 @@ public class RaakaAineDao implements Dao<RaakaAine, Integer> {
 
 
 
+=======
+        String kysely = "SELECT RaakaAine.id, RaakaAine.nimi FROM RaakaAine, AnnosRaakaAine\n"
+                + "              WHERE raakaaine.id = AnnosRaakaAine.raakaaine_id "
+                + "                  AND AnnosRaakaAine.annos_id = ?\n";
+
+
+>>>>>>> f4e5be302e7366e7628c1484b64640a599a2dcfa
         List<RaakaAine> raakaaineet = new ArrayList<>();
 
         try (Connection conn = database.getConnection()) {
@@ -70,7 +78,11 @@ public class RaakaAineDao implements Dao<RaakaAine, Integer> {
                 if (raakaaineenjarjestys(raakaaineet.get(j)) == pienin) {
                     String maara = raakaaineenmaara(raakaaineet.get(j));
                     String lisaohje = raakaaineenohje(raakaaineet.get(j));
+<<<<<<< HEAD
                     raakaaineetjamaara.add(pienin + ". " + raakaaineet.get(j).getNimi() + ", " + maara + ", Tilläggsinstruktioner: " + lisaohje);
+=======
+                    raakaaineetjamaara.add(pienin + ". " + raakaaineet.get(j).getNimi()+ ": " + maara + ". Tilläggsinstruktioner: " + lisaohje);
+>>>>>>> f4e5be302e7366e7628c1484b64640a599a2dcfa
                     
                 }
                 if (j == raakaaineet.size() - 1) {
@@ -79,6 +91,7 @@ public class RaakaAineDao implements Dao<RaakaAine, Integer> {
             }
         }
      
+<<<<<<< HEAD
         /*    for (int i = 0; i< raakaaineet.size(); i++) {
             String maara = raakaaineenmaara(raakaaineet.get(i));
 
@@ -88,8 +101,11 @@ public class RaakaAineDao implements Dao<RaakaAine, Integer> {
             int jarjestys = raakaaineenjarjestys(raakaaineet.get(i));
             raakaineetjamaara.add(jarjestys + ". " + raakaaineet.get(i).getNimi()+ ", " + maara);
 
+=======
+       
+>>>>>>> f4e5be302e7366e7628c1484b64640a599a2dcfa
             
-        }*/
+        
 
         return raakaaineetjamaara;
     }
@@ -209,5 +225,9 @@ public class RaakaAineDao implements Dao<RaakaAine, Integer> {
         }
 
      }
+<<<<<<< HEAD
+=======
+    
+>>>>>>> f4e5be302e7366e7628c1484b64640a599a2dcfa
 
 }
