@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import tikape.runko.domain.Annos;
+import tikape.runko.domain.RaakaAine;
 
 public class AnnosDao implements Dao<Annos, Integer> {
     
@@ -40,6 +41,8 @@ public class AnnosDao implements Dao<Annos, Integer> {
         return annos;
     }
     
+    
+    
 
     @Override
     public List<Annos> findAll() throws SQLException {
@@ -61,6 +64,26 @@ public class AnnosDao implements Dao<Annos, Integer> {
         
 
         return annokset;
+    }
+    
+    public int annoksetRaakaaineelle(int raakaaineid) throws SQLException {
+        String kysely = "SELECT Annos.id, Annos.nimi FROM Annos, AnnosRaakaAine\n"
+                + "              WHERE annos.id = AnnosRaakaAine.annos_id "
+                + "                  AND AnnosRaakaAine.raakaaine_id = ?\n";
+
+        List<Annos> annokset = new ArrayList<>();
+
+        try (Connection conn = database.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement(kysely);
+            stmt.setInt(1, raakaaineid);
+            ResultSet result = stmt.executeQuery();
+
+            while (result.next()) {
+                annokset.add(new Annos(result.getInt("id"), result.getString("nimi"), result.getString("ohje")));
+            }
+        }
+        
+        return annokset.size();
     }
 
     @Override
