@@ -134,10 +134,7 @@ public class Main {
             String maara = req.queryParams("maara");
             int jarjestys = Integer.parseInt(req.queryParams("jarjestys"));
        
-            System.out.println(aine);
-            System.out.println(drinkki);
-            System.out.println(maara);
-            System.out.println(jarjestys);
+
             
             annosraakaainedao.saveOrUpdate(new AnnosRaakaAine(drinkki, aine, jarjestys, maara));
              res.redirect("/annokset");
