@@ -234,6 +234,15 @@ public class Main {
             return new ModelAndView(map, "annos");
         }, new ThymeleafTemplateEngine());
                 
+        
+        get("/raakaaine/:id", (req, res) -> {
+
+            HashMap map = new HashMap<>();
+            Integer raakaaineId = Integer.parseInt(req.params(":id"));
+            map.put("raakaaine", raakaaineDao.findOne(raakaaineId));
+            map.put("annokset", annosDao.annoksetRaakaaineelle(raakaaineId));
+            return new ModelAndView(map, "raakaaine");
+        }, new ThymeleafTemplateEngine());
                 
 
        
