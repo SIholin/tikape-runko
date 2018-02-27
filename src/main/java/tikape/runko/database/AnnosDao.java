@@ -118,22 +118,14 @@ public class AnnosDao implements Dao<Annos, Integer> {
                 + " nimi = ?, ohje = ? WHERE id = ?");
 
         stmt.setString(1, object.getNimi());
-
         stmt.setString(2, object.getOhje());
-
         stmt.setInt(3, object.getId());
-
- 
 
         stmt.executeUpdate();
 
- 
-
         stmt.close();
-
         conn.close();
 
- 
 
         return object;
     }

@@ -20,7 +20,7 @@
         
         <h4>Lisää uusi</h4>
         
-        <form method="POST" action="">
+        <form method="POST" action="/uusi">
             <span>Drinkin nimi:</span><br/>
             <input type="text" name="nimi"/><br/>
             Ohje
@@ -32,7 +32,7 @@
         
         <h4>Lisää raaka-aineita</h4>
         
-        <form method="POST" action="">
+        <form method="POST" action="/lisaaminen">
             Drinkin nimi:
             <br>
                 <select name="drinkki">
@@ -52,11 +52,14 @@
             <br>
             Järjestys
             <br>
-                <input type="text" name="jarjestys">
+               <input type="text" name="jarjestys">
+                
             <br>
             Määrä
             <br>
-                <input type="text" name="maara">
+                
+                     <input type="text" name="maara">
+
             <br>
                 <input value="Lisää" type="submit">
                     

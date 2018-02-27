@@ -78,16 +78,16 @@ public class AnnosRaakaAineDao implements Dao<AnnosRaakaAine, Integer> {
 
     @Override
     public AnnosRaakaAine saveOrUpdate(AnnosRaakaAine object) throws SQLException {
-        if (object.getAnnosId() == null) {
+       
             return save(object);
-        } else {
-            return update(object);
-        }
+      
+        
     }
+
     
         private AnnosRaakaAine save(AnnosRaakaAine object) throws SQLException {
         Connection conn = database.getConnection();
-        PreparedStatement stmt = conn.prepareStatement("INSERT INTO AnnosRaakaAine" + "(annos_id, raakaaine_id, jarjestys, maara)" + "VALUES (?, ?)");
+        PreparedStatement stmt = conn.prepareStatement("INSERT INTO AnnosRaakaAine" + "(annos_id, raakaaine_id, jarjestys, maara)" + "VALUES (?, ?, ?, ?)");
         stmt.setInt(1, object.getAnnosId());
         stmt.setInt(2, object.getRaakaaineId());
         stmt.setInt(3, object.getJarjestys());
@@ -95,9 +95,11 @@ public class AnnosRaakaAineDao implements Dao<AnnosRaakaAine, Integer> {
         stmt.executeUpdate();
         stmt.close();
         
-        stmt = conn.prepareStatement("SELECT * FROM AnnnosRaakaAine WHERE annos_id = ? AND raakaaine_id = ? AND jarjestys = ? AND maara = ?");
-        stmt.setInt(1, object.getJarjestys());
-        stmt.setString(2, object.getMaara());
+        stmt = conn.prepareStatement("SELECT * FROM AnnosRaakaAine WHERE annos_id = ? AND raakaaine_id = ? AND jarjestys = ? AND maara = ?");
+        stmt.setInt(1, object.getAnnosId());
+        stmt.setInt(2, object.getRaakaaineId());
+        stmt.setInt(3, object.getJarjestys());
+        stmt.setString(4, object.getMaara());
         
         ResultSet rs = stmt.executeQuery();
         rs.next();
