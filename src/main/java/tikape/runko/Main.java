@@ -79,6 +79,14 @@ public class Main {
                 return "";
             }
             
+            List<Annos> annokset = annosDao.findAll();
+            for (int i = 0; i<annokset.size(); i++) {
+                if (nimi.equals(annokset.get(i).getNimi())) {
+                    res.redirect("/annokset");
+                    return "";
+                }
+            }
+            
             annosDao.saveOrUpdate(new Annos(null, nimi, ohje));
           
            
@@ -137,7 +145,7 @@ public class Main {
 
             
             annosraakaainedao.saveOrUpdate(new AnnosRaakaAine(drinkki, aine, jarjestys, maara));
-             res.redirect("/annokset");
+            res.redirect("/annokset");
             return "";
         });
         
@@ -165,6 +173,16 @@ public class Main {
                 res.redirect("/raakaaineet");
                 return "";
             }
+            
+            List<RaakaAine> raakaaineet = raakaaineDao.findAll();
+            for (int i = 0; i< raakaaineet.size(); i++) {
+                if (nimi.equals(raakaaineet.get(i).getNimi())) {
+                    res.redirect("/raakaaineet");
+                    return "";
+                }
+                    
+            }
+            
             
             raakaaineDao.saveOrUpdate(new RaakaAine(null, nimi));
           
