@@ -69,7 +69,7 @@ public class Main {
             
         }, new ThymeleafTemplateEngine());
         
-        Spark.post("/annokset", (req, res) -> {
+        Spark.post("/uusi", (req, res) -> {
              
             String nimi = req.queryParams("nimi");
             String ohje = req.queryParams("ohje");
@@ -101,19 +101,45 @@ public class Main {
         });
 
           
-        Spark.post("/annokset", (req, res) -> {
+        Spark.post("/lisaaminen", (req, res) -> {
+            int aine = Integer.parseInt(req.queryParams("raakaAine"));
+            int drinkki = Integer.parseInt(req.queryParams("drinkki"));
+//            List<RaakaAine> jotain = raakaaineDao.findAll();
+//         
+//            List<Annos> tama = annosDao.findAll();
+//            
+//            int aine = -1;
+//            
+//            int k = 0;
+//            while (k < jotain.size()) {
+//                if (jotain.get(k).getNimi() == j) {
+//                    aine = jotain.get(k).getId();
+//                    break;
+//                }
+//                
+//                k ++;
+//            }
+//            
+//              int drinkki = -1;
+//            
+//            int p = 0;
+//            while (k < tama.size()) {
+//                if (tama.get(k).getNimi() == i) {
+//                    drinkki = tama.get(k).getId();
+//                    break;
+//                }
+//                
+//                p ++;
+//            }
+            String maara = req.queryParams("maara");
+            int jarjestys = Integer.parseInt(req.queryParams("jarjestys"));
+       
+            System.out.println(aine);
+            System.out.println(drinkki);
+            System.out.println(maara);
+            System.out.println(jarjestys);
             
-//            ArrayList<RaakaAine> jotain = new ArrayList<>();
-//            ArrayList<Annos> tama = new ArrayList<>();
-//            while
-            
-            int i = Integer.parseInt(req.params("drinkki"));
-            int j = Integer.parseInt(req.params("raakaAine"));
-            
-            Integer jarjestys = Integer.parseInt(req.params("jarjestys"));
-            String maara = req.params("maara");
-            
-            annosraakaainedao.saveOrUpdate(new AnnosRaakaAine(i, j, jarjestys, maara));
+            annosraakaainedao.saveOrUpdate(new AnnosRaakaAine(drinkki, aine, jarjestys, maara));
              res.redirect("/annokset");
             return "";
         });
